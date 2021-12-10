@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if posts %}
+        <h1>{{cat}}</h1>
+
+        {% for post in posts %}
+
+            <li><a href="{% url 'post_details' post.pk %}">{{ post.title }}</a> - {{ post.author.first_name }} {{post.author.last_name}}<br/>
+                {{ post.body | slice:":200" | safe }}...</li>
+
+        {% endfor %}
+    {% else %}
+
+        <h1>Sorry this page doesn't exist</h1>
+
+    {% endif %}
+{% endblock %}

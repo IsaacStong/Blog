@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>{{post.title}}</h1>
+    <small>By: {{ post.author.first_name }} {{post.author.last_name}} </small><br/>
+    <small>{{post.post_date}} in <a href="{% url 'category' post.category %}">{{post.category}}</a></small><br/>
+    <hr>
+    <br/>
+    {{post.body|safe}}
+
+
+    <br/><br/><hr>
+    <a href="{% url 'home' %}" class="btn btn-dark">Back</a> {% if user.is_authenticated and user.id == post.author.id %} <a href="{% url 'edit' post.pk %}" class="btn btn-dark">Edit</a>  <a href="{% url 'delete' post.pk %}" class="btn btn-danger">Delete</a>  {% endif %}
+
+{% endblock %}

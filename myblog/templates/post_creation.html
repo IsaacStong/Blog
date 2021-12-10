@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if user.is_authenticated and user.is_staff %}
+
+        <h1>Create Post</h1>
+        <br/><br/>
+        <div class="form-group">
+            <form method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button class="btn btn-dark">Post</button>
+            </form>
+        </div>
+
+    {% else %}
+
+        <h1><strong>Nice try weather boy!</strong></h1>
+
+    {% endif %}
+
+{% endblock %}
