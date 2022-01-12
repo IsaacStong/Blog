@@ -12,5 +12,19 @@
 
     <br/><br/><hr>
     <a href="{% url 'home' %}" class="btn btn-dark">Back</a> {% if user.is_authenticated and user.id == post.author.id %} <a href="{% url 'edit' post.pk %}" class="btn btn-dark">Edit</a>  <a href="{% url 'delete' post.pk %}" class="btn btn-danger">Delete</a>  {% endif %}
+    <br/><br/>
+    <hr>
+    <br/>
+    <p>{{ post.total_likes }} users have liked this post.</p>
+    {% if user.is_authenticated %}
+        <form action="{% url 'like_post' post.pk %}" method="POST">
+            {% csrf_token %}
+            {% if liked %}
+            <button type="submit", name="post_id", value="{{ post.id }}", class="btn btn-dark btn-sm">Unlike</button>
+            {% else %}
+            <button type="submit", name="post_id", value="{{ post.id }}", class="btn btn-dark btn-sm">Like</button>
+            {% endif %}
+        </form>
+    {% endif %}
 
 {% endblock %}

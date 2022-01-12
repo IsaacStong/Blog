@@ -2,11 +2,29 @@
 
 {% block content %}
 
-    <h1>Posts</h1>
-    <ul>
-        {% for post in object_list %}
-        <li><a href="{% url 'post_details' post.pk %}">{{ post.title }}</a> - {{ post.author.first_name }} {{post.author.last_name}}<br/>
-            {{ post.body | slice:":200" | safe }}...</li>
-        {% endfor %}
-    </ul>
+    <header class="masthead" style="background-image: url('https://wallpaperaccess.com/full/3959331.jpg')">
+            <div class="container position-relative px-4 px-lg-6">  
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>Data Science Blog</h1>
+                            <span class="subheading">A Blog by Isaac Stong</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </header>
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                {% for post in object_list %}
+                <div class="post-preview">
+                    <a href="{% url 'post_details' post.pk %}"><h2 class="post-title">{{ post.title }}</h2></a>
+                    <p class="post-subtitle"><soft>{{ post.snippet | safe }}</soft><p>
+                </div>
+                <hr class="my-4" />
+                    {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}
